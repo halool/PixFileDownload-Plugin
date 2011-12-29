@@ -10,7 +10,7 @@ Notice: this plugin is tested on phonegap 1.3.0 xcode 4.1 debugger shows no erro
 
 5. in you index.html file add this line in the head section:
 
-``javascript
+```javascript
 		<script type="text/javascript" charset="utf-8" src="phonegap-1.3.0.js"></script>
         <script type="text/javascript" charset="utf-8" src="pixFileDownload.js"></script>
 		<script type="text/javascript">
@@ -31,8 +31,8 @@ Notice: this plugin is tested on phonegap 1.3.0 xcode 4.1 debugger shows no erro
 						//filepath : path for downloaded file (be sure to put /www/your downloadfolder name/filename)
 	                }
 		 </script>
+```
 
-``
 6. add the plugin to your PhoneGap,plist file found in (Supporting Files > PhoneGap.plist) :
 
 Key: PixFileDownload
@@ -43,18 +43,18 @@ Value: PixFileDownload
 
 so it looks like this now:
 
-``
-#import "AppDelegate.h"
-#ifdef PHONEGAP_FRAMEWORK
-	#import <PhoneGap/PhoneGapViewController.h>
-#else
-	#import "PhoneGapViewController.h"
-#endif
+```
+	#import "AppDelegate.h"
+	#ifdef PHONEGAP_FRAMEWORK
+		#import <PhoneGap/PhoneGapViewController.h>
+	#else
+		#import "PhoneGapViewController.h"
+	#endif
 
-#import "PixFileDownload.h"
+	#import "PixFileDownload.h"
 
-@implementation AppDelegate
-``
+	@implementation AppDelegate
+```
 
 now the plugin is ready to work 
 
@@ -62,7 +62,9 @@ now the plugin is ready to work
 ## Important Notice:
 
 Orginal work can be found in https://github.com/aaronksaunders/FileDownLoadApp
+
 fixes taken from:
+
 * https://github.com/aaronksaunders/FileDownLoadApp/pull/1
 * https://github.com/aaronksaunders/FileDownLoadApp/issues/3
 * http://blog.clearlyinnovative.com/post/2056122828/phonegap-plugin-for-downloading-url-all-the-code#comment-328769638
