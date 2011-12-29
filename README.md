@@ -35,9 +35,11 @@ Notice: this plugin is tested on phonegap 1.3.0 xcode 4.1 debugger shows no erro
 
 6. add the plugin to your PhoneGap,plist file found in (Supporting Files > PhoneGap.plist) :
 
-Key: PixFileDownload
-Type: String
-Value: PixFileDownload
+```
+	Key: PixFileDownload
+	Type: String
+	Value: PixFileDownload
+```
 
 7. now we need to add the pixfiledownload declaration to AppDelegate.m  found in (Classes > AppDelegate.m) your file should look like this
 
