@@ -1,3 +1,6 @@
+Update: Upgraded for Cordova 1.6.1 compatibility. Currently in testing...
+--------------------------------------------------------------------------
+
 Notice: this plugin is tested on phonegap 1.3.0 xcode 4.1 debugger shows no error
 
 # How to Install
