@@ -10,10 +10,10 @@ function PixFileDownload() {
 }
 
 PixFileDownload.prototype.downloadFile = function(url,destFileName) {
-    PhoneGap.exec("PixFileDownload.downloadFile", url,destFileName);
+    cordova.exec("PixFileDownload.downloadFile", url,destFileName);
 };
 
-PhoneGap.addConstructor(function() {
+cordova.addConstructor(function() {
 						window.fileDownloadMgr = new PixFileDownload();
 						});
 

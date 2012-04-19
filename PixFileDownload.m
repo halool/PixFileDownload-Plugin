@@ -12,7 +12,7 @@
 @implementation PixFileDownload
 
 
--(PGPlugin*) initWithWebView:(UIWebView*)theWebView
+-(CDVPlugin*) initWithWebView:(UIWebView*)theWebView
 {
     self = (PixFileDownload*)[super initWithWebView:theWebView];
     return self;
