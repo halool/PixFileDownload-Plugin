@@ -2,18 +2,20 @@
 //  pixFileDownload.js
 //  FileDownLoadApp
 //
-//  Created by Aaron saunders on 9/8/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Original created by Aaron Saunders on 9/8/10.
+//  Copyright 2010 clearly innovative llc. All rights reserved.
 //
+//  Modified by Johnathan Iannotti on 04/20/2012
+//  Twitter: @notticode
 
 function PixFileDownload() {
 }
 
 PixFileDownload.prototype.downloadFile = function(url,destFileName) {
-    PhoneGap.exec("PixFileDownload.downloadFile", url,destFileName);
+    cordova.exec("PixFileDownload.downloadFile", url,destFileName);
 };
 
-PhoneGap.addConstructor(function() {
+cordova.addConstructor(function() {
 						window.fileDownloadMgr = new PixFileDownload();
 						});
 
