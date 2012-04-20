@@ -1,4 +1,5 @@
-Update: Upgraded for Cordova 1.6.1 compatibility. Currently in testing...
+Update: Upgraded for Cordova 1.6.1 compatibility. 
+Tested on iOS 5.1 w/ Sencha Touch 2.0 & Cordova 1.6.1
 --------------------------------------------------------------------------
 
 Notice: this plugin is tested on phonegap 1.3.0 xcode 4.1 debugger shows no error

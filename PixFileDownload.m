@@ -2,9 +2,11 @@
 //  PixFileDownload.m
 //  FileDownLoadApp
 //
-//  Created by Aaron Saunders on 9/8/10.
+//  Original created by Aaron Saunders on 9/8/10.
 //  Copyright 2010 clearly innovative llc. All rights reserved.
 //
+//  Modified by Johnathan Iannotti on 04/20/2012
+//  Twitter: @notticode
 
 #import "PixFileDownload.h"
 
@@ -25,7 +27,7 @@
 //
 -(void) downloadFile:(NSMutableArray*)paramArray withDict:(NSMutableDictionary*)options {
 	
-	NSLog(@"in PixFileDownload.downloadFile",nil);
+	NSLog(@"in PixFileDownload.downloadFile");
 	NSString * sourceUrl = [paramArray objectAtIndex:0];
 	NSString * fileName = [paramArray objectAtIndex:1];
 	//NSString * completionCallback = [paramArray objectAtIndex:2];
@@ -42,7 +44,7 @@
 //
 -(void) downloadFileFromUrl:(NSMutableArray*)paramArray
 {
-	NSLog(@"in PixFileDownload.downloadFileFromUrl",nil);
+	NSLog(@"in PixFileDownload.downloadFileFromUrl");
 	[self performSelectorInBackground:@selector(downloadFileFromUrlInBackgroundTask:) withObject:paramArray];
 }
 
@@ -52,35 +54,38 @@
 //
 -(void) downloadFileFromUrlInBackgroundTask:(NSMutableArray*)paramArray
 {
-	NSLog(@"in PixFileDownload.downloadFileFromUrlInBackgroundTask",nil);
-	NSString * sourceUrl = [paramArray objectAtIndex:0];
-	NSString * fileName = [paramArray objectAtIndex:1];
+    NSLog(@"in PixFileDownload.downloadFileFromUrlInBackgroundTask");
+    NSString * sourceUrl = [paramArray objectAtIndex:0];
+    NSString * fileName = [paramArray objectAtIndex:1];
+    NSString *fullURI = [NSString stringWithFormat:@"%@/%@", sourceUrl, fileName];
+
+    NSLog(@"%@",fullURI);
+    
+    NSError* error=[[[NSError alloc]init] autorelease]; 
 	
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    NSData* theData = [NSData dataWithContentsOfURL: [NSURL URLWithString:sourceUrl] ];
+    NSData* theData = [NSData dataWithContentsOfURL:[NSURL URLWithString:fullURI]];
 	
 	// save file in documents directory
-	//NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	//NSString *documentsDirectory = [paths objectAtIndex:0];	
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];	
 	
-	//NSString *newFilePath = [documentsDirectory stringByAppendingString:[NSString stringWithFormat: @"/%@", fileName]];
-    NSString *newFilePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:fileName];
+	NSString *newFilePath = [documentsDirectory stringByAppendingString:[NSString stringWithFormat: @"/%@", fileName]];
+    //NSString *newFilePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:fileName];
 	
 	NSLog(@"Writing file to path %@", newFilePath);
-	//NSFileManager *fileManager=[NSFileManager defaultManager];
-	NSError *error=[[[NSError alloc]init] autorelease]; 
 	
 	BOOL response = [theData writeToFile:newFilePath options:NSDataWritingFileProtectionNone error:&error];
 	
 	if ( response == NO ) {
-		NSLog(@"file save result %@", [error description]);
+		NSLog(@"file save result %@", [error localizedDescription]);
         
 		// send our results back to the main thread  
 		[self performSelectorOnMainThread:@selector(downloadCompleteWithError:)  
-							   withObject:[error description] waitUntilDone:YES];  	
+							   withObject:[error localizedDescription] waitUntilDone:YES];  	
         
 	} else {
-		NSLog(@"No Error, file saved successfully", nil);
+		NSLog(@"No Error, file saved successfully");
 		
 		// send our results back to the main thread  
 		[self performSelectorOnMainThread:@selector(downloadComplete:)  
@@ -94,7 +99,7 @@
 // calls the predefined callback in the ui to indicate completion
 //
 -(void) downloadComplete:(NSString *)filePath {
-	NSLog(@"in PixFileDownload.downloadComplete",nil);	
+	NSLog(@"in PixFileDownload.downloadComplete");	
 	NSString * jsCallBack = [NSString stringWithFormat:@"pixFileDownloadComplete('%@');",filePath];    
 	[self writeJavascript: jsCallBack];
 }
@@ -103,7 +108,7 @@
 // calls the predefined callback in the ui to indicate completion with error
 //
 -(void) downloadCompleteWithError:(NSString *)errorStr {
-	NSLog(@"in PixFileDownload.downloadCompleteWithError",nil);	
+	NSLog(@"in PixFileDownload.downloadCompleteWithError");	
 	NSString * jsCallBack = [NSString stringWithFormat:@"pixFileDownloadCompleteWithError('%@');",errorStr];    
 	[self writeJavascript: jsCallBack];	
 }
