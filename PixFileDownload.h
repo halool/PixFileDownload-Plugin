@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <PhoneGap/PGPlugin.h>
+#import <Cordova/CDVPlugin.h>
 
-@interface PixFileDownload : PGPlugin {
+@interface PixFileDownload : CDVPlugin {
 	NSMutableArray* params;
 }
 
