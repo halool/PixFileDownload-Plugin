@@ -12,7 +12,7 @@
 @implementation PixFileDownload
 
 
--(PGPlugin*) initWithWebView:(UIWebView*)theWebView
+-(CDVPlugin*) initWithWebView:(UIWebView*)theWebView
 {
     self = (PixFileDownload*)[super initWithWebView:theWebView];
     return self;
@@ -26,9 +26,9 @@
 -(void) downloadFile:(NSMutableArray*)paramArray withDict:(NSMutableDictionary*)options {
 	
 	NSLog(@"in PixFileDownload.downloadFile",nil);
-	NSString * sourceUrl = [paramArray objectAtIndex:0];
-	NSString * fileName = [paramArray objectAtIndex:1];
-	//NSString * completionCallback = [paramArray objectAtIndex:2];
+	NSString * sourceUrl = [paramArray objectAtIndex:1];
+	NSString * fileName = [paramArray objectAtIndex:2];
+	//NSString * completionCallback = [paramArray objectAtIndex:0];
 	
 	params = [[NSMutableArray alloc] initWithCapacity:2];	
 	[params addObject:sourceUrl];
